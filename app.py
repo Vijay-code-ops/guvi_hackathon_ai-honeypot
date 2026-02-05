@@ -5,7 +5,7 @@ from datetime import datetime
 import requests
 
 app = Flask(__name__)
-VALID_API_KEY = "vijju123"  # Hardcoded for hackathon
+VALID_API_KEY = "test123456"  # Hardcoded for hackathon
 GUVI_CALLBACK_URL = "https://hackathon.guvi.in/api/updateHoneyPotFinalResult"  # NO SPACES!
 sessions = {}
 
@@ -29,7 +29,7 @@ def health():
 @require_api_key
 def analyze():
     data = request.get_json()
-    if not data or 'sessionId' not in data or 'message' not in 
+    if not data or 'sessionId' not in data or 'message' not in data:
         return jsonify({'error': 'Missing required fields'}), 400
     
     if 'text' not in data['message']:
@@ -105,5 +105,4 @@ def analyze():
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
-
     app.run(host='0.0.0.0', port=port, debug=False)
